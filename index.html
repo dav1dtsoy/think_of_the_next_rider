@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Put yourself in someone else's pedals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:         #EEF4ED;
+      --surface:    #F5FAF4;
+      --deep:       #283526;
+      --mid:        #52664E;
+      --sand:       #C8A87C;
+      --teal:       #6FA09C;
+      --teal-faint: #BAD5D3;
+      --line:       #CEDFCC;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--deep);
+      font-family: 'Work Sans', system-ui, sans-serif;
+      font-weight: 300;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HERO ─────────────────────────────────── */
+
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 72px 28px 100px;
+      text-align: center;
+      position: relative;
+    }
+
+    .eyebrow {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 36px;
+      animation: rise 0.9s ease both;
+    }
+
+    .bike-wrap {
+      margin-bottom: 36px;
+      animation: rise 0.9s 0.1s ease both;
+    }
+
+    h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(2.1rem, 5.5vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      max-width: 700px;
+      animation: rise 0.9s 0.2s ease both;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--sand);
+    }
+
+    .hero-sub {
+      margin-top: 22px;
+      font-size: 0.97rem;
+      color: var(--mid);
+      max-width: 400px;
+      animation: rise 0.9s 0.3s ease both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 34px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      opacity: 0.55;
+      animation: rise 1s 0.8s ease both;
+    }
+
+    .scroll-cue::after {
+      content: '';
+      width: 1px;
+      height: 42px;
+      background: var(--teal);
+      animation: drip 2.2s ease infinite;
+    }
+
+    @keyframes drip {
+      0%   { opacity: 0; transform: scaleY(0); transform-origin: top; }
+      40%  { opacity: 1; transform: scaleY(1); transform-origin: top; }
+      80%  { opacity: 0; transform: scaleY(1); transform-origin: bottom; }
+      100% { opacity: 0; transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ── GUIDE ────────────────────────────────── */
+
+    .guide {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 88px 28px 120px;
+    }
+
+    .guide-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 56px;
+    }
+
+    /* Steps share a CSS grid; rows are packed so the connector line is seamless */
+    .steps {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 0 24px;
+    }
+
+    /* ── Marker column ── */
+    .marker {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .num {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1.5px solid var(--teal-faint);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-size: 0.9rem;
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .connector {
+      flex: 1;
+      width: 1px;
+      min-height: 12px;
+      background: var(--line);
+      margin-top: 10px;
+    }
+
+    .last-connector { display: none; }
+
+    /* ── Content column ── */
+    .content {
+      padding-top: 7px;
+      padding-bottom: 52px;
+    }
+
+    .last-content { padding-bottom: 0; }
+
+    .step-title {
+      font-family: 'Fraunces', serif;
+      font-size: 1.22rem;
+      font-weight: 400;
+      color: var(--deep);
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+
+    .step-text {
+      font-size: 0.93rem;
+      color: var(--mid);
+      line-height: 1.78;
+    }
+
+    .tip {
+      margin-top: 14px;
+      padding: 12px 17px;
+      background: var(--surface);
+      border-left: 2px solid var(--sand);
+      border-radius: 0 6px 6px 0;
+      font-size: 0.85rem;
+      color: var(--mid);
+    }
+
+    .tip strong {
+      color: var(--sand);
+      font-weight: 500;
+    }
+
+    /* ── FOOTER ───────────────────────────────── */
+
+    footer {
+      text-align: center;
+      padding: 28px 24px 56px;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+      opacity: 0.5;
+    }
+
+    /* ── A11Y & MOTION ────────────────────────── */
+
+    @media (prefers-reduced-motion: reduce) {
+      .eyebrow, .bike-wrap, h1, .hero-sub, .scroll-cue { animation: none; opacity: 1; }
+      .scroll-cue::after { animation: none; }
+    }
+
+    /* ── RESPONSIVE ───────────────────────────── */
+
+    @media (max-width: 520px) {
+      h1 { font-size: 2rem; }
+      .steps { grid-template-columns: 42px 1fr; gap: 0 18px; }
+      .guide { padding: 64px 22px 96px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── HERO ──────────────────────────────────────── -->
+
+<section class="hero" aria-label="Site header">
+  <p class="eyebrow">Bicycle parking guide</p>
+
+  <div class="bike-wrap">
+    <!--
+      Two-tone line-art bicycle.
+      Frame & saddle → sand (#C8A87C)
+      Wheels & drivetrain → teal (#6FA09C)
+    -->
+    <svg width="200" height="128" viewBox="0 0 200 128" fill="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+      <!-- ── Wheels ── -->
+      <circle cx="52"  cy="92" r="30" stroke="#6FA09C" stroke-width="2.2"/>
+      <circle cx="152" cy="92" r="30" stroke="#6FA09C" stroke-width="2.2"/>
+      <!-- Hubs -->
+      <circle cx="52"  cy="92" r="4.5" fill="#EEF4ED" stroke="#6FA09C" stroke-width="1.8"/>
+      <circle cx="152" cy="92" r="4.5" fill="#EEF4ED" stroke="#6FA09C" stroke-width="1.8"/>
+      <!-- Rear spokes -->
+      <line x1="52" y1="62"  x2="52"  y2="122" stroke="#6FA09C" stroke-width="0.9" opacity="0.38"/>
+      <line x1="22" y1="92"  x2="82"  y2="92"  stroke="#6FA09C" stroke-width="0.9" opacity="0.38"/>
+      <line x1="31" y1="71"  x2="73"  y2="113" stroke="#6FA09C" stroke-width="0.9" opacity="0.38"/>
+      <line x1="73" y1="71"  x2="31"  y2="113" stroke="#6FA09C" stroke-width="0.9" opacity="0.38"/>
+      <!-- Front spokes -->
+      <line x1="152" y1="62"  x2="152" y2="122" stroke="#6FA09C" stroke-width="0.9" opacity="0.38"/>
+      <line x1="122" y1="92"  x2="182" y2="92"  stroke="#6FA09C" stroke-width="0.9" opacity="0.38"/>
+      <line x1="131" y1="71"  x2="173" y2="113" stroke="#6FA09C" stroke-width="0.9" opacity="0.38"/>
+      <line x1="173" y1="71"  x2="131" y2="113" stroke="#6FA09C" stroke-width="0.9" opacity="0.38"/>
+
+      <!-- ── Frame (sand) ── -->
+      <!-- Chain stay: bottom bracket → rear hub -->
+      <line x1="98"  y1="92" x2="52"  y2="92" stroke="#C8A87C" stroke-width="2.4" stroke-linecap="round"/>
+      <!-- Seat stay: seat cluster → rear hub -->
+      <line x1="84"  y1="47" x2="52"  y2="92" stroke="#C8A87C" stroke-width="2.4" stroke-linecap="round"/>
+      <!-- Seat tube: seat cluster → bottom bracket -->
+      <line x1="84"  y1="47" x2="98"  y2="92" stroke="#C8A87C" stroke-width="2.4" stroke-linecap="round"/>
+      <!-- Top tube: seat cluster → head tube top -->
+      <line x1="84"  y1="47" x2="130" y2="43" stroke="#C8A87C" stroke-width="2.4" stroke-linecap="round"/>
+      <!-- Down tube: head tube bottom → bottom bracket -->
+      <line x1="134" y1="58" x2="98"  y2="92" stroke="#C8A87C" stroke-width="2.4" stroke-linecap="round"/>
+      <!-- Head tube -->
+      <line x1="130" y1="43" x2="134" y2="59" stroke="#C8A87C" stroke-width="3.2" stroke-linecap="round"/>
+      <!-- Fork: head tube bottom → front hub -->
+      <line x1="134" y1="59" x2="152" y2="92" stroke="#C8A87C" stroke-width="2.4" stroke-linecap="round"/>
+      <!-- Seat post -->
+      <line x1="84"  y1="47" x2="84"  y2="34" stroke="#C8A87C" stroke-width="2.4" stroke-linecap="round"/>
+      <!-- Saddle -->
+      <line x1="74"  y1="31" x2="96"  y2="31" stroke="#C8A87C" stroke-width="3.6" stroke-linecap="round"/>
+      <!-- Handlebar stem -->
+      <line x1="130" y1="43" x2="136" y2="27" stroke="#C8A87C" stroke-width="2.4" stroke-linecap="round"/>
+      <!-- Handlebar -->
+      <line x1="128" y1="23" x2="144" y2="23" stroke="#C8A87C" stroke-width="3.2" stroke-linecap="round"/>
+
+      <!-- ── Drivetrain (teal) ── -->
+      <!-- Bottom bracket shell -->
+      <circle cx="98" cy="92" r="5.5" fill="#EEF4ED" stroke="#6FA09C" stroke-width="2"/>
+      <!-- Left crank -->
+      <line x1="98"  y1="92" x2="90" y2="82"  stroke="#6FA09C" stroke-width="2"   stroke-linecap="round"/>
+      <line x1="86"  y1="82" x2="94" y2="82"  stroke="#6FA09C" stroke-width="2.8" stroke-linecap="round"/>
+      <!-- Right crank -->
+      <line x1="98"  y1="92" x2="106" y2="102" stroke="#6FA09C" stroke-width="2"   stroke-linecap="round"/>
+      <line x1="102" y1="102" x2="110" y2="102" stroke="#6FA09C" stroke-width="2.8" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <h1>Put yourself in someone else's <em>pedals</em></h1>
+  <p class="hero-sub">A short guide to parking your bicycle thoughtfully at public spots.</p>
+
+  <div class="scroll-cue" aria-hidden="true">scroll</div>
+</section>
+
+
+<!-- ─── GUIDE ─────────────────────────────────────── -->
+
+<main class="guide" id="guide">
+  <p class="guide-label">Six steps · public bicycle parking</p>
+
+  <div class="steps">
+
+    <!-- Step 1 -->
+    <div class="marker">
+      <div class="num">1</div>
+      <div class="connector"></div>
+    </div>
+    <div class="content">
+      <h2 class="step-title">Find a designated rack</h2>
+      <p class="step-text">Look for official bike racks — the U-shaped, wave, or post-and-ring kind provided by the city or venue. Avoid locking to lampposts, benches, railings, or private fences unless no rack is nearby. Improvised anchors can obstruct pedestrians and may result in your bike being removed by authorities.</p>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="marker">
+      <div class="num">2</div>
+      <div class="connector"></div>
+    </div>
+    <div class="content">
+      <h2 class="step-title">Approach and position carefully</h2>
+      <p class="step-text">Wheel your bike alongside the rack and align it in the intended direction — usually perpendicular. Keep your handlebars turned inward so the bike sits flush without jutting into the path of other cyclists or pedestrians approaching the rack.</p>
+      <p class="tip"><strong>Tip:</strong> On a crowded rack, stagger your bike into the next slot and alternate which side faces the rack. It allows more bikes to share the same space.</p>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="marker">
+      <div class="num">3</div>
+      <div class="connector"></div>
+    </div>
+    <div class="content">
+      <h2 class="step-title">Lock the frame, not just the wheel</h2>
+      <p class="step-text">Pass your lock through the main frame triangle and around a fixed part of the rack. A wheel-only lock leaves the entire frame vulnerable — a thief can remove the locked wheel and walk away with the rest of the bicycle. When space is tight, always prioritize the frame.</p>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="marker">
+      <div class="num">4</div>
+      <div class="connector"></div>
+    </div>
+    <div class="content">
+      <h2 class="step-title">Use a quality lock</h2>
+      <p class="step-text">A rigid U-lock or heavy-duty chain resists cutting tools far better than a cable lock, which can be severed in seconds. For extra security, use two locks of different types — this forces a thief to carry two separate tools, which is a strong deterrent in public spaces.</p>
+      <p class="tip"><strong>Tip:</strong> Position the lock with the keyhole facing downward. It makes it significantly harder to use leverage or pick tools on the cylinder.</p>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="marker">
+      <div class="num">5</div>
+      <div class="connector"></div>
+    </div>
+    <div class="content">
+      <h2 class="step-title">Leave space for others</h2>
+      <p class="step-text">Once locked, check that your bike does not block other parked bikes, the rack access point, or the surrounding path. One inconsiderately placed bicycle can make an entire rack unusable for everyone else. Think of how you would feel arriving to find all slots blocked by a single bike angled across two spaces.</p>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="marker">
+      <div class="num">6</div>
+      <div class="last-connector"></div>
+    </div>
+    <div class="content last-content">
+      <h2 class="step-title">Take valuables with you</h2>
+      <p class="step-text">Detach your lights, remove saddlebags, and take any accessory that can be unclipped in under a minute — these are easy targets for opportunistic theft. A quick photo of your setup and the rack's location is useful if you ever need to file a report with the municipality.</p>
+    </div>
+
+  </div>
+</main>
+
+
+<!-- ─── FOOTER ────────────────────────────────────── -->
+
+<footer>
+  Good parking is a gift to the next rider
+</footer>
+
+</body>
+</html>
